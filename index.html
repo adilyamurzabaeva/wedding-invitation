@@ -3,143 +3,583 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Эльвина и Руслан • 27 июля 2027</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Эльвина и Руслан — 27 июля 2027</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --olive-dark: #5a6b4f;
+            --olive-medium: #7d8f6e;
+            --olive-light: #a8b89a;
+            --olive-pale: #d4dfd0;
+            --olive-lightest: #e8ede5;
+            --cream: #f7f5f2;
+            --text-dark: #3a3a3a;
+            --text-light: #6a6a6a;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: var(--cream);
+            color: var(--text-dark);
+            overflow-x: hidden;
+        }
+
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: linear-gradient(135deg, var(--olive-lightest) 0%, var(--cream) 100%);
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 600px;
+            height: 600px;
+            border-radius: 50%;
+            background: radial-gradient(circle, var(--olive-pale) 0%, transparent 70%);
+            opacity: 0.3;
+            animation: float 20s infinite ease-in-out;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -30%;
+            left: -10%;
+            width: 500px;
+            height: 500px;
+            border-radius: 50%;
+            background: radial-gradient(circle, var(--olive-light) 0%, transparent 70%);
+            opacity: 0.2;
+            animation: float 25s infinite ease-in-out reverse;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(30px, -30px) scale(1.1); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            animation: fadeIn 1.5s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .ampersand {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 4rem;
+            color: var(--olive-dark);
+            margin: 1rem 0;
+            font-weight: 300;
+        }
+
+        h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 4.5rem;
+            font-weight: 300;
+            color: var(--olive-dark);
+            margin-bottom: 0.5rem;
+            letter-spacing: 0.05em;
+        }
+
+        .names {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .date-line {
+            font-size: 1.2rem;
+            color: var(--text-light);
+            margin-top: 2rem;
+            font-weight: 300;
+            letter-spacing: 0.1em;
+        }
+
+        .divider {
+            width: 80px;
+            height: 1px;
+            background: var(--olive-medium);
+            margin: 3rem auto;
+            opacity: 0.5;
+        }
+
+        section {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 5rem 2rem;
+        }
+
+        h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3rem;
+            font-weight: 400;
+            color: var(--olive-dark);
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .countdown {
+            background: white;
+            border-radius: 16px;
+            padding: 3rem;
+            box-shadow: 0 10px 40px rgba(90, 107, 79, 0.1);
+            margin-bottom: 3rem;
+        }
+
+        .countdown-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .countdown-item {
+            text-align: center;
+        }
+
+        .countdown-number {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3.5rem;
+            color: var(--olive-dark);
+            font-weight: 600;
+            line-height: 1;
+            margin-bottom: 0.5rem;
+        }
+
+        .countdown-label {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+        }
+
+        .details {
+            background: var(--olive-lightest);
+            padding: 3rem;
+            border-radius: 16px;
+            margin-bottom: 3rem;
+        }
+
+        .detail-item {
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .detail-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .detail-label {
+            font-size: 0.85rem;
+            color: var(--olive-medium);
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            margin-bottom: 0.5rem;
+        }
+
+        .detail-value {
+            font-size: 1.3rem;
+            color: var(--text-dark);
+            font-weight: 400;
+        }
+
+        .location-link {
+            color: var(--olive-dark);
+            text-decoration: none;
+            border-bottom: 1px solid var(--olive-light);
+            transition: all 0.3s ease;
+        }
+
+        .location-link:hover {
+            border-bottom-color: var(--olive-dark);
+        }
+
+        .rsvp-form {
+            background: white;
+            padding: 3rem;
+            border-radius: 16px;
+            box-shadow: 0 10px 40px rgba(90, 107, 79, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            font-size: 0.9rem;
+            color: var(--text-light);
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        input[type="text"],
+        input[type="tel"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid var(--olive-pale);
+            border-radius: 8px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1rem;
+            color: var(--text-dark);
+            transition: all 0.3s ease;
+            background: var(--cream);
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            outline: none;
+            border-color: var(--olive-medium);
+            background: white;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .radio-group {
+            display: flex;
+            gap: 2rem;
+            margin-top: 0.5rem;
+        }
+
+        .radio-option {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+        }
+
+        input[type="radio"] {
+            width: 20px;
+            height: 20px;
+            accent-color: var(--olive-dark);
+            cursor: pointer;
+        }
+
+        .radio-option label {
+            margin: 0;
+            cursor: pointer;
+            text-transform: none;
+            letter-spacing: 0;
+            font-size: 1rem;
+        }
+
+        button {
+            width: 100%;
+            padding: 1.2rem;
+            background: var(--olive-dark);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1rem;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+        }
+
+        button:hover {
+            background: var(--olive-medium);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(90, 107, 79, 0.3);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        .success-message {
+            display: none;
+            background: var(--olive-lightest);
+            padding: 2rem;
+            border-radius: 8px;
+            text-align: center;
+            color: var(--olive-dark);
+            margin-top: 2rem;
+        }
+
+        .success-message.show {
+            display: block;
+            animation: slideDown 0.5s ease-out;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        footer {
+            text-align: center;
+            padding: 3rem 2rem;
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 3rem;
+            }
+
+            .ampersand {
+                font-size: 2.5rem;
+            }
+
+            h2 {
+                font-size: 2.2rem;
+            }
+
+            .countdown-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1.5rem;
+            }
+
+            .countdown-number {
+                font-size: 2.5rem;
+            }
+
+            .rsvp-form,
+            .countdown,
+            .details {
+                padding: 2rem 1.5rem;
+            }
+
+            section {
+                padding: 3rem 1.5rem;
+            }
+        }
+    </style>
 </head>
 <body>
-    <div class="container">
-        <!-- Hero Section -->
-        <section class="hero">
-            <div class="hero-content">
-                <div class="names">
-                    <h1>Эльвина <span class="ampersand">&</span> Руслан</h1>
-                </div>
-                <div class="date">
-                    <p class="date-text">27 июля 2027</p>
-                </div>
-                <div class="divider"></div>
-                <p class="tagline">Приглашаем вас разделить с нами этот особенный день</p>
+    <div class="hero">
+        <div class="hero-content">
+            <div class="names">
+                <h1>Эльвина</h1>
+                <div class="ampersand">&</div>
+                <h1>Руслан</h1>
             </div>
-        </section>
-
-        <!-- Countdown Section -->
-        <section class="countdown">
-            <h2>До торжества осталось</h2>
-            <div class="countdown-wrapper">
-                <div class="countdown-item">
-                    <span class="countdown-number" id="days">0</span>
-                    <span class="countdown-label">дней</span>
-                </div>
-                <div class="countdown-item">
-                    <span class="countdown-number" id="hours">0</span>
-                    <span class="countdown-label">часов</span>
-                </div>
-                <div class="countdown-item">
-                    <span class="countdown-number" id="minutes">0</span>
-                    <span class="countdown-label">минут</span>
-                </div>
-                <div class="countdown-item">
-                    <span class="countdown-number" id="seconds">0</span>
-                    <span class="countdown-label">секунд</span>
-                </div>
-            </div>
-        </section>
-
-        <!-- Details Section -->
-        <section class="details">
-            <div class="detail-card">
-                <h3>Дата и время</h3>
-                <p class="detail-main">Воскресенье, 27 июля 2027</p>
-                <p class="detail-sub">Начало в 14:00</p>
-            </div>
-
-            <div class="detail-card">
-                <h3>Место проведения</h3>
-                <p class="detail-main">Парк Урал Батыр</p>
-                <p class="detail-sub">село Аскарово</p>
-            </div>
-
-            <div class="detail-card">
-                <h3>Дресс-код</h3>
-                <p class="detail-main">Элегантный стиль</p>
-                <p class="detail-sub">Приветствуются оттенки зеленого</p>
-            </div>
-        </section>
-
-        <!-- Calendar Section -->
-        <section class="calendar-section">
-            <h2>Добавить в календарь</h2>
-            <div class="calendar-buttons">
-                <a href="#" class="calendar-btn" id="google-calendar">Google Calendar</a>
-                <a href="#" class="calendar-btn" id="ical-download">iCal / Outlook</a>
-            </div>
-        </section>
-
-        <!-- RSVP Section -->
-        <section class="rsvp">
-            <h2>Подтверждение присутствия</h2>
-            <p class="rsvp-intro">Пожалуйста, дайте нам знать о вашем решении до 1 июля 2027</p>
-
-            <form id="rsvp-form" class="rsvp-form">
-                <div class="form-group">
-                    <label for="name">Ваше имя *</label>
-                    <input type="text" id="name" name="name" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="email">Email или телефон *</label>
-                    <input type="text" id="contact" name="contact" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="guests">Количество гостей *</label>
-                    <select id="guests" name="guests" required>
-                        <option value="">Выберите</option>
-                        <option value="1">1 человек</option>
-                        <option value="2">2 человека</option>
-                        <option value="3">3 человека</option>
-                        <option value="4">4 человека</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label>Вы придете? *</label>
-                    <div class="radio-group">
-                        <label class="radio-label">
-                            <input type="radio" name="attending" value="yes" required>
-                            <span>Да, буду с удовольствием</span>
-                        </label>
-                        <label class="radio-label">
-                            <input type="radio" name="attending" value="no">
-                            <span>К сожалению, не смогу</span>
-                        </label>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="message">Пожелания или комментарий</label>
-                    <textarea id="message" name="message" rows="4"></textarea>
-                </div>
-
-                <button type="submit" class="submit-btn">Отправить</button>
-            </form>
-
-            <div id="success-message" class="success-message" style="display: none;">
-                <p>Спасибо за ответ! Мы рады, что вы с нами.</p>
-            </div>
-        </section>
-
-        <!-- Footer -->
-        <footer class="footer">
-            <div class="divider"></div>
-            <p>С любовью, Эльвина и Руслан</p>
-            <p class="footer-date">27.07.2027</p>
-        </footer>
+            <div class="date-line">27 июля 2027</div>
+        </div>
     </div>
 
-    <script src="script.js"></script>
+    <section>
+        <h2>До торжества осталось</h2>
+        <div class="countdown">
+            <div class="countdown-grid">
+                <div class="countdown-item">
+                    <div class="countdown-number" id="days">0</div>
+                    <div class="countdown-label">Дней</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="countdown-number" id="hours">0</div>
+                    <div class="countdown-label">Часов</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="countdown-number" id="minutes">0</div>
+                    <div class="countdown-label">Минут</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="countdown-number" id="seconds">0</div>
+                    <div class="countdown-label">Секунд</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <h2>Детали</h2>
+        <div class="details">
+            <div class="detail-item">
+                <div class="detail-label">Дата</div>
+                <div class="detail-value">Воскресенье, 27 июля 2027</div>
+            </div>
+            <div class="divider"></div>
+            <div class="detail-item">
+                <div class="detail-label">Время</div>
+                <div class="detail-value">14:00</div>
+            </div>
+            <div class="divider"></div>
+            <div class="detail-item">
+                <div class="detail-label">Место</div>
+                <div class="detail-value">
+                    Парк Урал Батыр<br>
+                    Село Аскарово
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <h2>Подтверждение присутствия</h2>
+        <form class="rsvp-form" id="rsvpForm">
+            <div class="form-group">
+                <label for="name">Ваше имя *</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+
+            <div class="form-group">
+                <label for="phone">Телефон *</label>
+                <input type="tel" id="phone" name="phone" required>
+            </div>
+
+            <div class="form-group">
+                <label>Вы придете? *</label>
+                <div class="radio-group">
+                    <div class="radio-option">
+                        <input type="radio" id="attending-yes" name="attending" value="yes" required>
+                        <label for="attending-yes">Да, буду</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" id="attending-no" name="attending" value="no">
+                        <label for="attending-no">Не смогу</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group" id="guests-group">
+                <label for="guests">Количество гостей (включая вас)</label>
+                <select id="guests" name="guests">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5+</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="message">Пожелания или комментарии</label>
+                <textarea id="message" name="message" rows="3"></textarea>
+            </div>
+
+            <button type="submit">Отправить</button>
+
+            <div class="success-message" id="successMessage">
+                Спасибо за подтверждение! Мы получили ваш ответ.
+            </div>
+        </form>
+    </section>
+
+    <footer>
+        <div class="divider"></div>
+        <p style="margin-top: 2rem;">С любовью, Эльвина и Руслан</p>
+    </footer>
+
+    <script>
+        // Countdown timer
+        const weddingDate = new Date('2027-07-27T14:00:00').getTime();
+
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const distance = weddingDate - now;
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById('days').textContent = days;
+            document.getElementById('hours').textContent = hours;
+            document.getElementById('minutes').textContent = minutes;
+            document.getElementById('seconds').textContent = seconds;
+
+            if (distance < 0) {
+                document.getElementById('days').textContent = '0';
+                document.getElementById('hours').textContent = '0';
+                document.getElementById('minutes').textContent = '0';
+                document.getElementById('seconds').textContent = '0';
+            }
+        }
+
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+
+        // Form handling
+        const form = document.getElementById('rsvpForm');
+        const successMessage = document.getElementById('successMessage');
+        const guestsGroup = document.getElementById('guests-group');
+        const attendingRadios = document.querySelectorAll('input[name="attending"]');
+
+        // Show/hide guests field based on attendance
+        attendingRadios.forEach(radio => {
+            radio.addEventListener('change', (e) => {
+                if (e.target.value === 'yes') {
+                    guestsGroup.style.display = 'block';
+                } else {
+                    guestsGroup.style.display = 'none';
+                }
+            });
+        });
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const formData = new FormData(form);
+            const data = Object.fromEntries(formData);
+
+            // Store in localStorage
+            const responses = JSON.parse(localStorage.getItem('weddingRSVP') || '[]');
+            responses.push({
+                ...data,
+                timestamp: new Date().toISOString()
+            });
+            localStorage.setItem('weddingRSVP', JSON.stringify(responses));
+
+            // In production, send to backend here
+            // Example: await fetch('/api/rsvp', { method: 'POST', body: JSON.stringify(data) })
+
+            // Show success message
+            form.style.display = 'none';
+            successMessage.classList.add('show');
+
+            // Reset form after 3 seconds
+            setTimeout(() => {
+                form.reset();
+                form.style.display = 'block';
+                successMessage.classList.remove('show');
+                guestsGroup.style.display = 'block';
+            }, 5000);
+        });
+
+        // Initialize guests visibility
+        guestsGroup.style.display = 'block';
+    </script>
 </body>
 </html>
